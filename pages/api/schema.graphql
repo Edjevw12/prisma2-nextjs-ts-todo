@@ -2,14 +2,23 @@
 ### Do not make changes to this file directly
 
 
+scalar Date
+
+type Mutation {
+  createTask(description: String, title: String!, userId: Int): Task!
+  setCompleteTask(completed: Boolean, taskId: Int): Task
+}
+
 type Query {
-  hello(name: String): String!
+  user(userId: Int!): User!
   users: [User!]!
 }
 
 type Task {
-  createdAt: String!
+  completed: Boolean!
+  createdAt: Date!
   description: String!
+  id: Int!
   title: String!
 }
 

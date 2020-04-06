@@ -4,9 +4,17 @@
  */
 
 
-
-
-
+import { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    date<FieldName extends string>(fieldName: FieldName, opts?: core.ScalarInputFieldConfig<core.GetGen3<"inputTypes", TypeName, FieldName>>): void // "Date";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Date";
+  }
+}
 
 
 declare global {
@@ -20,10 +28,13 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  Mutation: {};
   Query: {};
   Task: { // root type
-    createdAt: string; // String!
+    completed: boolean; // Boolean!
+    createdAt: any; // Date!
     description: string; // String!
+    id: number; // Int!
     title: string; // String!
   }
   User: { // root type
@@ -31,26 +42,32 @@ export interface NexusGenRootTypes {
     firstName: string; // String!
     id: number; // Int!
     lastName: string; // String!
-    tasks: NexusGenRootTypes['Task'][]; // [Task!]!
   }
   String: string;
   Int: number;
   Float: number;
   Boolean: boolean;
   ID: string;
+  Date: any;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    createTask: NexusGenRootTypes['Task']; // Task!
+    setCompleteTask: NexusGenRootTypes['Task'] | null; // Task
+  }
   Query: { // field return type
-    hello: string; // String!
+    user: NexusGenRootTypes['User']; // User!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   Task: { // field return type
-    createdAt: string; // String!
+    completed: boolean; // Boolean!
+    createdAt: any; // Date!
     description: string; // String!
+    id: number; // Int!
     title: string; // String!
   }
   User: { // field return type
@@ -63,9 +80,20 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createTask: { // args
+      description?: string | null; // String
+      title: string; // String!
+      userId?: number | null; // Int
+    }
+    setCompleteTask: { // args
+      completed?: boolean | null; // Boolean
+      taskId?: number | null; // Int
+    }
+  }
   Query: {
-    hello: { // args
-      name?: string | null; // String
+    user: { // args
+      userId: number; // Int!
     }
   }
 }
@@ -75,7 +103,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Query" | "Task" | "User";
+export type NexusGenObjectNames = "Mutation" | "Query" | "Task" | "User";
 
 export type NexusGenInputNames = never;
 
@@ -83,7 +111,7 @@ export type NexusGenEnumNames = never;
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "Date" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 
