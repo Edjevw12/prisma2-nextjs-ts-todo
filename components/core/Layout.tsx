@@ -1,8 +1,8 @@
 import Header from './Header';
 
-const Layout = ({ children }) => {
+const Layout: React.FC = ({ children }) => {
   return (
-    <div className="bg-gray-100">
+    <div>
       <Header />
       {children}
     </div>

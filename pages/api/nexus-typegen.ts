@@ -4,7 +4,7 @@
  */
 
 
-import { core } from "nexus"
+import { core } from "@nexus/schema"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
     date<FieldName extends string>(fieldName: FieldName, opts?: core.ScalarInputFieldConfig<core.GetGen3<"inputTypes", TypeName, FieldName>>): void // "Date";
@@ -57,6 +57,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createTask: NexusGenRootTypes['Task']; // Task!
+    deleteTask: NexusGenRootTypes['Task'] | null; // Task
     setCompleteTask: NexusGenRootTypes['Task'] | null; // Task
   }
   Query: { // field return type
@@ -85,6 +86,9 @@ export interface NexusGenArgTypes {
       description?: string | null; // String
       title: string; // String!
       userId?: number | null; // Int
+    }
+    deleteTask: { // args
+      taskId?: number | null; // Int
     }
     setCompleteTask: { // args
       completed?: boolean | null; // Boolean

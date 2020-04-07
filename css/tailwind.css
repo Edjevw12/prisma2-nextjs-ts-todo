@@ -1,3 +1,19 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.btn {
+  @apply inline-block px-4 py-3 rounded-full shadow-lg bg-brand-purple-600 text-white uppercase font-bold;
+}
+
+.btn:hover {
+  @apply bg-brand-purple-400;
+}
+
+.btn:focus {
+  @apply outline-none shadow-outline;
+}
+
+body {
+  @apply .bg-gray-100;
+}

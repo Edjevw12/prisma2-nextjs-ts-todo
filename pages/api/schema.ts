@@ -5,10 +5,13 @@ const {
   scalarType,
   stringArg,
   asNexusMethod,
-} = require('nexus');
+  booleanArg,
+} = require('@nexus/schema');
 import { PrismaClient, tasksClient } from '@prisma/client';
-import { booleanArg } from 'nexus';
+
 // const { PrismaClient, tasksClient } = require('@prisma/client');
+
+// using require instead of import because of tsconfig.json module > esnext and nexus require commonjs
 
 const prisma = new PrismaClient();
 
@@ -88,6 +91,16 @@ const Mutation = objectType({
           where: { id: taskId },
           data: { completed },
         });
+      },
+    });
+    t.field('deleteTask', {
+      type: 'Task',
+      nullable: true,
+      args: {
+        taskId: intArg(),
+      },
+      resolve: async (_, { taskId }) => {
+        return await prisma.tasks.delete({ where: { id: taskId } });
       },
     });
   },
