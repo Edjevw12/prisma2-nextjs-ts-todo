@@ -1,3 +1,2 @@
-## Todo app with Prisma2.0 / Nextjs / Apolloserver
+## Todo app with Prisma2 / Next.js / Apollo
 
-Playing around with the stack... :)
